@@ -15,8 +15,8 @@ bl_info = {
     "name" : "NX_Labyrinthe",
     "author" : "neXXen",
     "description" : "",
-    "blender" : (3, 0, 0),
-    "version" : (0, 0, 1),
+    "blender" : (3, 1, 0),
+    "version" : (0, 2, 1),
     "location" : "",
     "warning" : "",
     "category" : "Generic"

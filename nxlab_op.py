@@ -42,13 +42,16 @@ class NXLabyrinthe:
   lastSelector = None
 
   def edgeSelect(self, nodeGroup):
+    if 'Group Input' in nodeGroup.nodes:
+      nodeGroup.nodes.remove(nodeGroup.nodes['Group Input'])
+    
     _in = Node(nodeGroup, 'NodeGroupInput')
 
     b = Node(nodeGroup, 'FunctionNodeBooleanMath', values={'operation': 'OR'})
     b.location(x=(_in.x() + b.width() + self.offset), y=b.height())
     b.link(1, _in.output(0))
 
-    c = Node(nodeGroup, 'FunctionNodeCompareFloats', values={'operation': 'EQUAL'})
+    c = Node(nodeGroup, 'FunctionNodeCompare', values={'operation': 'EQUAL'})
     c.location(x=(_in.x() + c.width() + self.offset), y=-(c.height()))
     c.link(0, _in.output(1))
     c.link(1, _in.output(2))
@@ -61,17 +64,20 @@ class NXLabyrinthe:
     _out.link(1, _in.output(1))
   
   def edgesRange(self, nodeGroup):
+    if 'Group Input' in nodeGroup.nodes:
+      nodeGroup.nodes.remove(nodeGroup.nodes['Group Input'])
+    
     _in = Node(nodeGroup, 'NodeGroupInput')
 
     _or = Node(nodeGroup, 'FunctionNodeBooleanMath', values={'operation': 'OR'})
     _or.link(1, _in.output(0))
 
-    greaterEqual = Node(nodeGroup, 'FunctionNodeCompareFloats', values={'operation': 'GREATER_EQUAL'})
+    greaterEqual = Node(nodeGroup, 'FunctionNodeCompare', values={'operation': 'GREATER_EQUAL'})
     greaterEqual.location(x=(_in.x() + greaterEqual.width() + self.offset), y=greaterEqual.height())
     greaterEqual.link(0, _in.output(1))
     greaterEqual.link(1, _in.output(2))
 
-    lessEqual = Node(nodeGroup, 'FunctionNodeCompareFloats', values={'operation': 'LESS_EQUAL'})
+    lessEqual = Node(nodeGroup, 'FunctionNodeCompare', values={'operation': 'LESS_EQUAL'})
     lessEqual.location(x=(_in.x() + lessEqual.width() + self.offset), y=-(lessEqual.height()))
     lessEqual.link(0, _in.output(1))
     lessEqual.link(1, _in.output(3))
@@ -90,7 +96,9 @@ class NXLabyrinthe:
     _out.link(1, _in.output(1))
 
   def labCorner(self, nodeGroup):
-    print('LabCorner', nodeGroup)
+    if 'Group Input' in nodeGroup.nodes:
+      nodeGroup.nodes.remove(nodeGroup.nodes['Group Input'])
+
     _in = Node(nodeGroup, 'NodeGroupInput')
 
     delGeo = Node(nodeGroup, 'GeometryNodeDeleteGeometry', values={'domain': 'EDGE'})
@@ -141,6 +149,8 @@ class NXLabyrinthe:
     ids.sort()
     ids_group = []
 
+    print('NUMBER EDGES TO DELETE', len(ids))
+
     for id in ids:
       if (id - 1) in ids_group:
         ids_group.append((id - 1, id))
@@ -156,66 +166,6 @@ class NXLabyrinthe:
           ids_group.append(id)
 
     return ids_group
-
-  def trace(self, node_group):
-
-    start_time = time.time()
-    print('TRACE...')
-    nodes = node_group.nodes
-    links = node_group.links
-    
-    prevNode = None
-
-    for i in range(self.laby.w):
-      for j in range(self.laby.h):
-        ids = []
-        cell = (self.laby.getCell(i,j))
-
-        if i < self.laby.w - 1 and cell['E']:
-          id = (i + 1) * self.laby.h + j
-          if id not in ids:
-            ids.append(id)
-        if j < self.laby.h -1 and cell['N']:
-          id = (((self.laby.w + 1) * self.laby.h)) + (j + 1) * self.laby.w + i 
-          if id not in ids:
-            ids.append(id) 
-
-        for id in ids:
-          ng = Node(node_group, 'GeometryNodeGroup',
-            name='NX_GN', nodeGroup='NX_EdgeSelector', callback=(self, 'edgeSelect'))
-          ng.node().inputs[2].default_value = id
-
-          if prevNode is None:
-            dg = nodes['Delete Geometry']
-            index = Node(node_group, 'GeometryNodeInputIndex')
-            index.location(x=dg.location.x, y=(dg.location.y - index.height() - (2*self.offset)))
-            output_index = index.output(0) 
-            ng.location(x=(index.x() + dg.width + self.offset), y=index.y())
-          else:
-            output_index = prevNode.output(1)
-            output_bool = prevNode.output(0)
-            input_bool = ng.input(0)
-            links.new(output_bool, input_bool)
-            ng.location(x=(prevNode.x() + dg.width + self.offset), y=prevNode.y())
-            
-          links.new(output_index, ng.input(1))
-            
-          prevNode = ng
-    
-    if prevNode is not None:
-      dg = nodes['Delete Geometry']
-      delNode = Node(node_group, 'GeometryNodeDeleteGeometry', values={'domain': 'EDGE'})
-      delNode.location(x=(prevNode.x() + delNode.width() + (2*self.offset)), y=dg.location.y)
-      delNode.link(0, dg.outputs[0])
-      delNode.link(1, prevNode.output(0))
-      
-      out = nodes['Group Output']
-      out.location.x = delNode.x() + out.width + self.offset
-      out.location.y = delNode.y()
-      links.new(out.inputs[0], delNode.output(0))    
-    
-    print("--- %s seconds ---" % (time.time() - start_time))
-    print('END TRACE')
 
   def trace1(self, node_group):
 
@@ -274,9 +224,7 @@ class NXLabyrinthe:
     print("--- %s seconds ---" % (time.time() - start_time))
     print('END TRACE 1')
   
-  def addIssues(self, node_group):
-      print('ADD_ISSES')
-      
+  def addIssues(self, node_group):      
       corner = node_group.nodes['LabCorner']
       last = node_group.nodes['NX_Last']
 
@@ -313,10 +261,6 @@ class NXLabyrinthe:
     return index
 
   def createIssue(self, node_group, way):  
-      print('CREATE_ISSUE :', way)
-      print('ENTRANCE :', self.entrance.axe, self.entrance.number)
-      print('EXIT :', self.exit.axe, self.exit.number)
-
       ng = None
       if way in node_group:
         ng = node_group[way]
@@ -375,9 +319,6 @@ class NXLabyrinthe:
       borne = self.x - 1
     
     self.exit.number = randint(0, borne)
-
-    print('ENTRANCE :', self.entrance.axe, self.entrance.number)
-    print('EXIT :', self.exit.axe, self.exit.number)
 
   
 class OBJECT_OT_Create_Labyrinthe(Operator, NXLabyrinthe):
@@ -507,10 +448,7 @@ class OBJECT_OT_Create_Labyrinthe(Operator, NXLabyrinthe):
 
     # obj.NXLab_laby = laby_str5
 
-    # self.trace(node_group)
     self.trace1(node_group)
-
-    logging.warning('ADD ISSUES')
     self.addIssues(node_group)
     
     return {'FINISHED'}
@@ -546,8 +484,6 @@ class OBJECT_OT_New_Labyrinthe(Operator, NXLabyrinthe):
 
     if 'NX_LABYRINTHE' not in self.obj.modifiers:
       return {'CANCELLED'}
-    
-    logging.info('AFTER TEST')
 
     node_group = self.obj.modifiers['NX_LABYRINTHE'].node_group
     nodes = self.obj.modifiers['NX_LABYRINTHE'].node_group.nodes
@@ -585,10 +521,7 @@ class OBJECT_OT_New_Labyrinthe(Operator, NXLabyrinthe):
     self.laby = Labyrinthe()
     self.laby.init(self.x, self.y, self.orientation, self.orientationStrength)
 
-    print()
-    # self.trace(node_group)
     self.trace1(node_group)
-
     self.addIssues(node_group)
 
     return {'FINISHED'}
@@ -618,13 +551,9 @@ class OBJECT_OT_Update_Labyrinthe(Operator, NXLabyrinthe):
     self.entrance.number = self.obj.NXLab.entrance.number
     self.exit.axe = self.obj.NXLab.exit.axe
     self.exit.number = self.obj.NXLab.exit.number
-
-    print('ENTREE :', self.entrance.axe, self.entrance.number)
-    print('SORTIE :', self.exit.axe, self.exit.number)
     
     if 'NX_LABYRINTHE' not in self.obj.modifiers:
-      return {'CANCELLED'}
-    
+      return {'CANCELLED'}    
 
     nodes = self.obj.modifiers['NX_LABYRINTHE'].node_group.nodes
 
