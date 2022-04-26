@@ -4,7 +4,7 @@
 
 Blender addon to generate maze
 
-<img src="https://img.shields.io/badge/Blender-3.1.0-green" /> <img src="https://img.shields.io/badge/Python-3.10-blue" /> <img src="https://img.shields.io/badge/Addon-1.0.0-orange" />
+<img src="https://img.shields.io/badge/Blender-3.O.0-green" /> <img src="https://img.shields.io/badge/Python-3.10-blue" /> <img src="https://img.shields.io/badge/Addon-1.0.1-orange" />
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
 The generated maze is "perfect"[^1], all cell could be visited and there is a way to throught it!
@@ -35,7 +35,7 @@ In Blender preferences:
 - [x] Add wall, height and thickness
 - [x] Add corner, radius and number of segments
 - [x] Add issues, create random issues
-- [x] Update maze after this creation, wall, corner and issues
+- [x] Update maze after this creation, wall, corner and exits
 - [ ] Save maze in plein text
 - [ ] Resolve maze
 
@@ -50,7 +50,7 @@ In Object Mode _NX_Labyrinthe_ is located in the Sidebar (N) > NX_Tools
 For your first try start with a little number of cells (under 10 or 15).  
 Set a size of cell. The final length of the maze depends of this 2 options.  
 Set wall height and thickness or let empty to generate only edges.  
-To creae Entrance and Exit, select Issues
+To creae Entrance and Exit, select Exits
 
 Press Create Labyrinthe to generate maze in your scene
 
@@ -66,7 +66,7 @@ Maze corner with _Radius_ set to 0.05 and _Segments_ to 4:
 
 The maze must be recreated if you want to change the number of cells or the _Orientation_.  
 In this case, click on _New maze_ to generate a new maze with these settings.
-For the other options, _Cell Size_, _Wall_, _Corner_ and _Issues_, you can update the current maze without changing it.
+For the other options, _Cell Size_, _Wall_, _Corner_ and _Exits_, you can update the current maze without changing it.
 
 ## About the number of cells
 
