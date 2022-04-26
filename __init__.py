@@ -16,7 +16,7 @@ bl_info = {
     "author" : "neXXen",
     "description" : "",
     "blender" : (3, 1, 0),
-    "version" : (1, 1, 0),
+    "version" : (1, 1, 1),
     "location" : "",
     "warning" : "",
     "category" : "Generic"
