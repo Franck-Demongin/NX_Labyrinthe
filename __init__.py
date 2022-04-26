@@ -85,7 +85,7 @@ class NXLAB_PT_control_panel(Panel):
 
             col = layout.column()
             col.separator()
-            col.prop(obj.NXLab, 'issues', text="Issues")
+            col.prop(obj.NXLab, 'issues', text="Exits")
 
             col.separator()
             row = layout.row(align=False)
@@ -144,7 +144,7 @@ class NXLAB_PT_control_panel(Panel):
 
             col = layout.column()
             col.separator()
-            col.prop(scene.NXLab, 'issues', text="Issues")
+            col.prop(scene.NXLab, 'issues', text="Exits")
 
             col = layout.column()
             op = col.operator('object.create_labyrinthe')
