@@ -17,9 +17,9 @@ The generated maze is "perfect"[^1], all cell could be visited and there is a wa
 
 Download ZIP archive for your blender version:
 
-![Blender 3.0](https://github.com/Franck-Demongin/NX_Labyrinthe/releases/tag/v1.0.0)
+![Blender 3.0](https://github.com/Franck-Demongin/NX_Labyrinthe/releases/tag/v1.0.1)
 
-![Blender 3.1](https://github.com/Franck-Demongin/NX_Labyrinthe/releases/tag/v1.1.0)
+![Blender 3.1](https://github.com/Franck-Demongin/NX_Labyrinthe/releases/tag/v1.1.1)
 
 In Blender preferences:
 
