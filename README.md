@@ -32,8 +32,8 @@ In Blender preferences:
 - [x] Choose an orientation and this level of influence on the result
 - [x] Add wall, height and thickness
 - [x] Add corner, radius and number of segments
-- [x] Add issues, create random issues
-- [x] Update maze after this creation, wall, corner and issues
+- [x] Add exits, create random entry and exit
+- [x] Update maze after this creation, wall, corner and exits
 - [ ] Save maze in plein text
 - [ ] Resolve maze      
 
@@ -42,18 +42,18 @@ In Object Mode _NX_Labyrinthe_ is located in the Sidebar (N) > NX_Tools
 
 ### Create maze
 
-![initial_ui](https://user-images.githubusercontent.com/54265936/165274651-591e6739-f0bf-4871-913e-d1d96ab0c91f.png)
+![initial_ui](https://user-images.githubusercontent.com/54265936/165711103-b00db96a-797b-4e53-838c-6dc08e88852b.png)
 
 For your first try start with a little number of cells (under 10 or 15).  
 Set a size of cell. The final length of the maze depends of this 2 options.  
 Set wall height and thickness or let empty to generate only edges.  
-To creae Entrance and Exit, select Issues
+To creae Entrance and Exit, select Exits
 
 Press Create Labyrinthe to generate maze in your scene
 
-Maze of 10x10 cells, with wall height and thickness:
+Maze of 15x15 cells, with wall height and thickness:
 
-![maze_10x10](https://user-images.githubusercontent.com/54265936/165280708-469876e6-1edd-420e-b680-e941c8eee8a6.png)
+![maze_15x15](https://user-images.githubusercontent.com/54265936/165711735-31052524-a5f6-4b8c-9d81-b018814c7e30.png)
 
 Maze corner with _Radius_ set to 0.05 and _Segments_ to 4:
 
@@ -62,7 +62,7 @@ Maze corner with _Radius_ set to 0.05 and _Segments_ to 4:
 ## Update maze
 The maze must be recreated if you want to change the number of cells or the _Orientation_.  
 In this case, click on _New maze_ to generate a new maze with these settings.
-For the other options, _Cell Size_, _Wall_, _Corner_ and _Issues_, you can update the current maze without changing it.
+For the other options, _Cell Size_, _Wall_, _Corner_ and _Exits_, you can update the current maze without changing it.
 
 ## About the number of cells
 
