@@ -42,7 +42,7 @@ In Object Mode _NX_Labyrinthe_ is located in the Sidebar (N) > NX_Tools
 
 ### Create maze
 
-![initial_ui](https://user-images.githubusercontent.com/54265936/165274651-591e6739-f0bf-4871-913e-d1d96ab0c91f.png)
+![initial_ui](https://user-images.githubusercontent.com/54265936/165711103-b00db96a-797b-4e53-838c-6dc08e88852b.png)
 
 For your first try start with a little number of cells (under 10 or 15).  
 Set a size of cell. The final length of the maze depends of this 2 options.  
@@ -51,9 +51,9 @@ To creae Entrance and Exit, select Exits
 
 Press Create Labyrinthe to generate maze in your scene
 
-Maze of 10x10 cells, with wall height and thickness:
+Maze of 15x15 cells, with wall height and thickness:
 
-![maze_10x10](https://user-images.githubusercontent.com/54265936/165280708-469876e6-1edd-420e-b680-e941c8eee8a6.png)
+![maze_15x15](https://user-images.githubusercontent.com/54265936/165711735-31052524-a5f6-4b8c-9d81-b018814c7e30.png)
 
 Maze corner with _Radius_ set to 0.05 and _Segments_ to 4:
 
@@ -77,3 +77,7 @@ If your archieve a better result I will very happy to see that! :slightly_smilin
 The initial code was found on this site (https://allophysique.com), in this article : [Python Labyrinthe](https://allophysique.com/posts/python/python-labyrinthe/?fbclid=IwAR16AbrrbUUOEq4dz29jrjJtKWBoOiXBYpjHQGfOd-7hE5XiYik40jmlO-Q)
 
 A big thank to this anonymous author!
+
+
+
+
