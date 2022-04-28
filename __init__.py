@@ -16,7 +16,7 @@ bl_info = {
     "author" : "neXXen",
     "description" : "Maze generator",
     "blender" : (3, 1, 0),
-    "version" : (1, 1, 1),
+    "version" : (1, 1, 2),
     "location" : "View 3D > Sidebar > NX_Tools",
     "doc_url" : "https://github.com/Franck-Demongin/NX_Labyrinthe",
     "category" : "Object"
