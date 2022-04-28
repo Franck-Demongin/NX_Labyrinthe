@@ -14,12 +14,12 @@
 bl_info = {
     "name" : "NX_Labyrinthe",
     "author" : "neXXen",
-    "description" : "",
+    "description" : "Maze generator",
     "blender" : (3, 1, 0),
     "version" : (1, 1, 1),
-    "location" : "",
-    "warning" : "",
-    "category" : "Generic"
+    "location" : "View 3D > Sidebar > NX_Tools",
+    "doc_url" : "https://github.com/Franck-Demongin/NX_Labyrinthe",
+    "category" : "Object"
 }
 
 import time
@@ -35,6 +35,7 @@ class NXLAB_PT_control_panel(Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     bl_category = 'NX_Tools'
+    bl_options = {'DEFAULT_CLOSED'}
     
     @classmethod
     def poll(cls, context):
